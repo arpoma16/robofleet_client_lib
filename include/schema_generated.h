@@ -36,6 +36,12 @@ struct StringBuilder;
 struct Float64;
 struct Float64Builder;
 
+struct Float32;
+struct Float32Builder;
+
+struct UInt8;
+struct UInt8Builder;
+
 }  // namespace std_msgs
 
 namespace geometry_msgs {
@@ -83,6 +89,9 @@ struct NavSatFixBuilder;
 struct BatteryState;
 struct BatteryStateBuilder;
 
+struct Imu;
+struct ImuBuilder;
+
 struct LaserScan;
 struct LaserScanBuilder;
 
@@ -96,19 +105,6 @@ struct PointCloud2;
 struct PointCloud2Builder;
 
 }  // namespace sensor_msgs
-
-namespace mission_msgs {
-
-struct MissionRequest;
-struct MissionRequestBuilder;
-
-struct eventRequest;
-struct eventRequestBuilder;
-
-struct eventResponse;
-struct eventResponseBuilder;
-
-}  // namespace mission_msgs
 
 namespace amrl_msgs {
 
@@ -159,6 +155,66 @@ struct Odometry;
 struct OdometryBuilder;
 
 }  // namespace nav_msgs
+
+namespace std_srvs {
+
+struct Empty;
+struct EmptyBuilder;
+
+struct EmptyRequest;
+struct EmptyRequestBuilder;
+
+struct EmptyResponse;
+struct EmptyResponseBuilder;
+
+struct Trigger;
+struct TriggerBuilder;
+
+struct TriggerRequest;
+struct TriggerRequestBuilder;
+
+struct TriggerResponse;
+struct TriggerResponseBuilder;
+
+struct SetBool;
+struct SetBoolBuilder;
+
+struct SetBoolRequest;
+struct SetBoolRequestBuilder;
+
+struct SetBoolResponse;
+struct SetBoolResponseBuilder;
+
+}  // namespace std_srvs
+
+namespace aerialcore_common {
+
+struct ConfigMission;
+struct ConfigMissionBuilder;
+
+struct ConfigMissionRequest;
+struct ConfigMissionRequestBuilder;
+
+struct ConfigMissionResponse;
+struct ConfigMissionResponseBuilder;
+
+struct eventRequest;
+struct eventRequestBuilder;
+
+struct eventResponse;
+struct eventResponseBuilder;
+
+}  // namespace aerialcore_common
+
+namespace dji_osdk_ros {
+
+struct ObstacleInfo;
+struct ObstacleInfoBuilder;
+
+struct WaypointV2MissionStatePush;
+struct WaypointV2MissionStatePushBuilder;
+
+}  // namespace dji_osdk_ros
 
 FLATBUFFERS_MANUALLY_ALIGNED_STRUCT(4) RosTime FLATBUFFERS_FINAL_CLASS {
  private:
@@ -519,6 +575,110 @@ inline ::flatbuffers::Offset<Float64> CreateFloat64(
   Float64Builder builder_(_fbb);
   builder_.add_data(data);
   builder_.add___metadata(__metadata);
+  return builder_.Finish();
+}
+
+struct Float32 FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef Float32Builder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT___METADATA = 4,
+    VT_DATA = 6
+  };
+  const fb::MsgMetadata *__metadata() const {
+    return GetPointer<const fb::MsgMetadata *>(VT___METADATA);
+  }
+  float data() const {
+    return GetField<float>(VT_DATA, 0.0f);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT___METADATA) &&
+           verifier.VerifyTable(__metadata()) &&
+           VerifyField<float>(verifier, VT_DATA, 4) &&
+           verifier.EndTable();
+  }
+};
+
+struct Float32Builder {
+  typedef Float32 Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add___metadata(::flatbuffers::Offset<fb::MsgMetadata> __metadata) {
+    fbb_.AddOffset(Float32::VT___METADATA, __metadata);
+  }
+  void add_data(float data) {
+    fbb_.AddElement<float>(Float32::VT_DATA, data, 0.0f);
+  }
+  explicit Float32Builder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<Float32> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<Float32>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<Float32> CreateFloat32(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    float data = 0.0f) {
+  Float32Builder builder_(_fbb);
+  builder_.add_data(data);
+  builder_.add___metadata(__metadata);
+  return builder_.Finish();
+}
+
+struct UInt8 FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef UInt8Builder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT___METADATA = 4,
+    VT_DATA = 6
+  };
+  const fb::MsgMetadata *__metadata() const {
+    return GetPointer<const fb::MsgMetadata *>(VT___METADATA);
+  }
+  uint8_t data() const {
+    return GetField<uint8_t>(VT_DATA, 0);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT___METADATA) &&
+           verifier.VerifyTable(__metadata()) &&
+           VerifyField<uint8_t>(verifier, VT_DATA, 1) &&
+           verifier.EndTable();
+  }
+};
+
+struct UInt8Builder {
+  typedef UInt8 Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add___metadata(::flatbuffers::Offset<fb::MsgMetadata> __metadata) {
+    fbb_.AddOffset(UInt8::VT___METADATA, __metadata);
+  }
+  void add_data(uint8_t data) {
+    fbb_.AddElement<uint8_t>(UInt8::VT_DATA, data, 0);
+  }
+  explicit UInt8Builder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<UInt8> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<UInt8>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<UInt8> CreateUInt8(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    uint8_t data = 0) {
+  UInt8Builder builder_(_fbb);
+  builder_.add___metadata(__metadata);
+  builder_.add_data(data);
   return builder_.Finish();
 }
 
@@ -1661,6 +1821,157 @@ inline ::flatbuffers::Offset<BatteryState> CreateBatteryStateDirect(
       cell_temperature__);
 }
 
+struct Imu FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef ImuBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT___METADATA = 4,
+    VT_HEADER = 6,
+    VT_ORIENTATION = 8,
+    VT_ORIENTATION_COVARIANCE = 10,
+    VT_ANGULAR_VELOCITY = 12,
+    VT_ANGULAR_VELOCITY_COVARIANCE = 14,
+    VT_LINEAR_ACCELERATION = 16,
+    VT_LINEAR_ACCELERATION_COVARIANCE = 18
+  };
+  const fb::MsgMetadata *__metadata() const {
+    return GetPointer<const fb::MsgMetadata *>(VT___METADATA);
+  }
+  const fb::std_msgs::Header *header() const {
+    return GetPointer<const fb::std_msgs::Header *>(VT_HEADER);
+  }
+  const fb::geometry_msgs::Quaternion *orientation() const {
+    return GetPointer<const fb::geometry_msgs::Quaternion *>(VT_ORIENTATION);
+  }
+  const ::flatbuffers::Vector<double> *orientation_covariance() const {
+    return GetPointer<const ::flatbuffers::Vector<double> *>(VT_ORIENTATION_COVARIANCE);
+  }
+  const fb::geometry_msgs::Vector3 *angular_velocity() const {
+    return GetPointer<const fb::geometry_msgs::Vector3 *>(VT_ANGULAR_VELOCITY);
+  }
+  const ::flatbuffers::Vector<double> *angular_velocity_covariance() const {
+    return GetPointer<const ::flatbuffers::Vector<double> *>(VT_ANGULAR_VELOCITY_COVARIANCE);
+  }
+  const fb::geometry_msgs::Vector3 *linear_acceleration() const {
+    return GetPointer<const fb::geometry_msgs::Vector3 *>(VT_LINEAR_ACCELERATION);
+  }
+  const ::flatbuffers::Vector<double> *linear_acceleration_covariance() const {
+    return GetPointer<const ::flatbuffers::Vector<double> *>(VT_LINEAR_ACCELERATION_COVARIANCE);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT___METADATA) &&
+           verifier.VerifyTable(__metadata()) &&
+           VerifyOffsetRequired(verifier, VT_HEADER) &&
+           verifier.VerifyTable(header()) &&
+           VerifyOffsetRequired(verifier, VT_ORIENTATION) &&
+           verifier.VerifyTable(orientation()) &&
+           VerifyOffsetRequired(verifier, VT_ORIENTATION_COVARIANCE) &&
+           verifier.VerifyVector(orientation_covariance()) &&
+           VerifyOffsetRequired(verifier, VT_ANGULAR_VELOCITY) &&
+           verifier.VerifyTable(angular_velocity()) &&
+           VerifyOffsetRequired(verifier, VT_ANGULAR_VELOCITY_COVARIANCE) &&
+           verifier.VerifyVector(angular_velocity_covariance()) &&
+           VerifyOffsetRequired(verifier, VT_LINEAR_ACCELERATION) &&
+           verifier.VerifyTable(linear_acceleration()) &&
+           VerifyOffsetRequired(verifier, VT_LINEAR_ACCELERATION_COVARIANCE) &&
+           verifier.VerifyVector(linear_acceleration_covariance()) &&
+           verifier.EndTable();
+  }
+};
+
+struct ImuBuilder {
+  typedef Imu Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add___metadata(::flatbuffers::Offset<fb::MsgMetadata> __metadata) {
+    fbb_.AddOffset(Imu::VT___METADATA, __metadata);
+  }
+  void add_header(::flatbuffers::Offset<fb::std_msgs::Header> header) {
+    fbb_.AddOffset(Imu::VT_HEADER, header);
+  }
+  void add_orientation(::flatbuffers::Offset<fb::geometry_msgs::Quaternion> orientation) {
+    fbb_.AddOffset(Imu::VT_ORIENTATION, orientation);
+  }
+  void add_orientation_covariance(::flatbuffers::Offset<::flatbuffers::Vector<double>> orientation_covariance) {
+    fbb_.AddOffset(Imu::VT_ORIENTATION_COVARIANCE, orientation_covariance);
+  }
+  void add_angular_velocity(::flatbuffers::Offset<fb::geometry_msgs::Vector3> angular_velocity) {
+    fbb_.AddOffset(Imu::VT_ANGULAR_VELOCITY, angular_velocity);
+  }
+  void add_angular_velocity_covariance(::flatbuffers::Offset<::flatbuffers::Vector<double>> angular_velocity_covariance) {
+    fbb_.AddOffset(Imu::VT_ANGULAR_VELOCITY_COVARIANCE, angular_velocity_covariance);
+  }
+  void add_linear_acceleration(::flatbuffers::Offset<fb::geometry_msgs::Vector3> linear_acceleration) {
+    fbb_.AddOffset(Imu::VT_LINEAR_ACCELERATION, linear_acceleration);
+  }
+  void add_linear_acceleration_covariance(::flatbuffers::Offset<::flatbuffers::Vector<double>> linear_acceleration_covariance) {
+    fbb_.AddOffset(Imu::VT_LINEAR_ACCELERATION_COVARIANCE, linear_acceleration_covariance);
+  }
+  explicit ImuBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<Imu> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<Imu>(end);
+    fbb_.Required(o, Imu::VT_HEADER);
+    fbb_.Required(o, Imu::VT_ORIENTATION);
+    fbb_.Required(o, Imu::VT_ORIENTATION_COVARIANCE);
+    fbb_.Required(o, Imu::VT_ANGULAR_VELOCITY);
+    fbb_.Required(o, Imu::VT_ANGULAR_VELOCITY_COVARIANCE);
+    fbb_.Required(o, Imu::VT_LINEAR_ACCELERATION);
+    fbb_.Required(o, Imu::VT_LINEAR_ACCELERATION_COVARIANCE);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<Imu> CreateImu(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    ::flatbuffers::Offset<fb::std_msgs::Header> header = 0,
+    ::flatbuffers::Offset<fb::geometry_msgs::Quaternion> orientation = 0,
+    ::flatbuffers::Offset<::flatbuffers::Vector<double>> orientation_covariance = 0,
+    ::flatbuffers::Offset<fb::geometry_msgs::Vector3> angular_velocity = 0,
+    ::flatbuffers::Offset<::flatbuffers::Vector<double>> angular_velocity_covariance = 0,
+    ::flatbuffers::Offset<fb::geometry_msgs::Vector3> linear_acceleration = 0,
+    ::flatbuffers::Offset<::flatbuffers::Vector<double>> linear_acceleration_covariance = 0) {
+  ImuBuilder builder_(_fbb);
+  builder_.add_linear_acceleration_covariance(linear_acceleration_covariance);
+  builder_.add_linear_acceleration(linear_acceleration);
+  builder_.add_angular_velocity_covariance(angular_velocity_covariance);
+  builder_.add_angular_velocity(angular_velocity);
+  builder_.add_orientation_covariance(orientation_covariance);
+  builder_.add_orientation(orientation);
+  builder_.add_header(header);
+  builder_.add___metadata(__metadata);
+  return builder_.Finish();
+}
+
+inline ::flatbuffers::Offset<Imu> CreateImuDirect(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    ::flatbuffers::Offset<fb::std_msgs::Header> header = 0,
+    ::flatbuffers::Offset<fb::geometry_msgs::Quaternion> orientation = 0,
+    const std::vector<double> *orientation_covariance = nullptr,
+    ::flatbuffers::Offset<fb::geometry_msgs::Vector3> angular_velocity = 0,
+    const std::vector<double> *angular_velocity_covariance = nullptr,
+    ::flatbuffers::Offset<fb::geometry_msgs::Vector3> linear_acceleration = 0,
+    const std::vector<double> *linear_acceleration_covariance = nullptr) {
+  auto orientation_covariance__ = orientation_covariance ? _fbb.CreateVector<double>(*orientation_covariance) : 0;
+  auto angular_velocity_covariance__ = angular_velocity_covariance ? _fbb.CreateVector<double>(*angular_velocity_covariance) : 0;
+  auto linear_acceleration_covariance__ = linear_acceleration_covariance ? _fbb.CreateVector<double>(*linear_acceleration_covariance) : 0;
+  return fb::sensor_msgs::CreateImu(
+      _fbb,
+      __metadata,
+      header,
+      orientation,
+      orientation_covariance__,
+      angular_velocity,
+      angular_velocity_covariance__,
+      linear_acceleration,
+      linear_acceleration_covariance__);
+}
+
 struct LaserScan FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
   typedef LaserScanBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
@@ -2202,384 +2513,6 @@ inline ::flatbuffers::Offset<PointCloud2> CreatePointCloud2Direct(
 }
 
 }  // namespace sensor_msgs
-
-namespace mission_msgs {
-
-struct MissionRequest FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
-  typedef MissionRequestBuilder Builder;
-  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
-    VT_UAV_ID = 4,
-    VT_MISSION_ID = 6,
-    VT_MISSION_TYPE = 8,
-    VT_WAYPOINT = 10,
-    VT_RADIUS = 12,
-    VT_MAXVEL = 14,
-    VT_IDLEVEL = 16,
-    VT_YAW = 18,
-    VT_GIMBALPITCH = 20,
-    VT_SPEED = 22,
-    VT_YAWMODE = 24,
-    VT_TRACEMODE = 26,
-    VT_GIMBALPITCHMODE = 28,
-    VT_FINISHACTION = 30,
-    VT_COMMANDLIST = 32,
-    VT_COMMANDPARAMETER = 34
-  };
-  const ::flatbuffers::String *uav_id() const {
-    return GetPointer<const ::flatbuffers::String *>(VT_UAV_ID);
-  }
-  const ::flatbuffers::String *mission_id() const {
-    return GetPointer<const ::flatbuffers::String *>(VT_MISSION_ID);
-  }
-  int32_t mission_type() const {
-    return GetField<int32_t>(VT_MISSION_TYPE, 0);
-  }
-  const ::flatbuffers::Vector<::flatbuffers::Offset<fb::sensor_msgs::NavSatFix>> *waypoint() const {
-    return GetPointer<const ::flatbuffers::Vector<::flatbuffers::Offset<fb::sensor_msgs::NavSatFix>> *>(VT_WAYPOINT);
-  }
-  double radius() const {
-    return GetField<double>(VT_RADIUS, 0.0);
-  }
-  double maxVel() const {
-    return GetField<double>(VT_MAXVEL, 0.0);
-  }
-  double idleVel() const {
-    return GetField<double>(VT_IDLEVEL, 0.0);
-  }
-  const ::flatbuffers::Vector<float> *yaw() const {
-    return GetPointer<const ::flatbuffers::Vector<float> *>(VT_YAW);
-  }
-  const ::flatbuffers::Vector<float> *gimbalPitch() const {
-    return GetPointer<const ::flatbuffers::Vector<float> *>(VT_GIMBALPITCH);
-  }
-  const ::flatbuffers::Vector<float> *speed() const {
-    return GetPointer<const ::flatbuffers::Vector<float> *>(VT_SPEED);
-  }
-  int32_t yawMode() const {
-    return GetField<int32_t>(VT_YAWMODE, 0);
-  }
-  int32_t traceMode() const {
-    return GetField<int32_t>(VT_TRACEMODE, 0);
-  }
-  int32_t gimbalPitchMode() const {
-    return GetField<int32_t>(VT_GIMBALPITCHMODE, 0);
-  }
-  int32_t finishAction() const {
-    return GetField<int32_t>(VT_FINISHACTION, 0);
-  }
-  const ::flatbuffers::Vector<float> *commandList() const {
-    return GetPointer<const ::flatbuffers::Vector<float> *>(VT_COMMANDLIST);
-  }
-  const ::flatbuffers::Vector<float> *commandParameter() const {
-    return GetPointer<const ::flatbuffers::Vector<float> *>(VT_COMMANDPARAMETER);
-  }
-  bool Verify(::flatbuffers::Verifier &verifier) const {
-    return VerifyTableStart(verifier) &&
-           VerifyOffset(verifier, VT_UAV_ID) &&
-           verifier.VerifyString(uav_id()) &&
-           VerifyOffset(verifier, VT_MISSION_ID) &&
-           verifier.VerifyString(mission_id()) &&
-           VerifyField<int32_t>(verifier, VT_MISSION_TYPE, 4) &&
-           VerifyOffset(verifier, VT_WAYPOINT) &&
-           verifier.VerifyVector(waypoint()) &&
-           verifier.VerifyVectorOfTables(waypoint()) &&
-           VerifyField<double>(verifier, VT_RADIUS, 8) &&
-           VerifyField<double>(verifier, VT_MAXVEL, 8) &&
-           VerifyField<double>(verifier, VT_IDLEVEL, 8) &&
-           VerifyOffset(verifier, VT_YAW) &&
-           verifier.VerifyVector(yaw()) &&
-           VerifyOffset(verifier, VT_GIMBALPITCH) &&
-           verifier.VerifyVector(gimbalPitch()) &&
-           VerifyOffset(verifier, VT_SPEED) &&
-           verifier.VerifyVector(speed()) &&
-           VerifyField<int32_t>(verifier, VT_YAWMODE, 4) &&
-           VerifyField<int32_t>(verifier, VT_TRACEMODE, 4) &&
-           VerifyField<int32_t>(verifier, VT_GIMBALPITCHMODE, 4) &&
-           VerifyField<int32_t>(verifier, VT_FINISHACTION, 4) &&
-           VerifyOffset(verifier, VT_COMMANDLIST) &&
-           verifier.VerifyVector(commandList()) &&
-           VerifyOffset(verifier, VT_COMMANDPARAMETER) &&
-           verifier.VerifyVector(commandParameter()) &&
-           verifier.EndTable();
-  }
-};
-
-struct MissionRequestBuilder {
-  typedef MissionRequest Table;
-  ::flatbuffers::FlatBufferBuilder &fbb_;
-  ::flatbuffers::uoffset_t start_;
-  void add_uav_id(::flatbuffers::Offset<::flatbuffers::String> uav_id) {
-    fbb_.AddOffset(MissionRequest::VT_UAV_ID, uav_id);
-  }
-  void add_mission_id(::flatbuffers::Offset<::flatbuffers::String> mission_id) {
-    fbb_.AddOffset(MissionRequest::VT_MISSION_ID, mission_id);
-  }
-  void add_mission_type(int32_t mission_type) {
-    fbb_.AddElement<int32_t>(MissionRequest::VT_MISSION_TYPE, mission_type, 0);
-  }
-  void add_waypoint(::flatbuffers::Offset<::flatbuffers::Vector<::flatbuffers::Offset<fb::sensor_msgs::NavSatFix>>> waypoint) {
-    fbb_.AddOffset(MissionRequest::VT_WAYPOINT, waypoint);
-  }
-  void add_radius(double radius) {
-    fbb_.AddElement<double>(MissionRequest::VT_RADIUS, radius, 0.0);
-  }
-  void add_maxVel(double maxVel) {
-    fbb_.AddElement<double>(MissionRequest::VT_MAXVEL, maxVel, 0.0);
-  }
-  void add_idleVel(double idleVel) {
-    fbb_.AddElement<double>(MissionRequest::VT_IDLEVEL, idleVel, 0.0);
-  }
-  void add_yaw(::flatbuffers::Offset<::flatbuffers::Vector<float>> yaw) {
-    fbb_.AddOffset(MissionRequest::VT_YAW, yaw);
-  }
-  void add_gimbalPitch(::flatbuffers::Offset<::flatbuffers::Vector<float>> gimbalPitch) {
-    fbb_.AddOffset(MissionRequest::VT_GIMBALPITCH, gimbalPitch);
-  }
-  void add_speed(::flatbuffers::Offset<::flatbuffers::Vector<float>> speed) {
-    fbb_.AddOffset(MissionRequest::VT_SPEED, speed);
-  }
-  void add_yawMode(int32_t yawMode) {
-    fbb_.AddElement<int32_t>(MissionRequest::VT_YAWMODE, yawMode, 0);
-  }
-  void add_traceMode(int32_t traceMode) {
-    fbb_.AddElement<int32_t>(MissionRequest::VT_TRACEMODE, traceMode, 0);
-  }
-  void add_gimbalPitchMode(int32_t gimbalPitchMode) {
-    fbb_.AddElement<int32_t>(MissionRequest::VT_GIMBALPITCHMODE, gimbalPitchMode, 0);
-  }
-  void add_finishAction(int32_t finishAction) {
-    fbb_.AddElement<int32_t>(MissionRequest::VT_FINISHACTION, finishAction, 0);
-  }
-  void add_commandList(::flatbuffers::Offset<::flatbuffers::Vector<float>> commandList) {
-    fbb_.AddOffset(MissionRequest::VT_COMMANDLIST, commandList);
-  }
-  void add_commandParameter(::flatbuffers::Offset<::flatbuffers::Vector<float>> commandParameter) {
-    fbb_.AddOffset(MissionRequest::VT_COMMANDPARAMETER, commandParameter);
-  }
-  explicit MissionRequestBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
-        : fbb_(_fbb) {
-    start_ = fbb_.StartTable();
-  }
-  ::flatbuffers::Offset<MissionRequest> Finish() {
-    const auto end = fbb_.EndTable(start_);
-    auto o = ::flatbuffers::Offset<MissionRequest>(end);
-    return o;
-  }
-};
-
-inline ::flatbuffers::Offset<MissionRequest> CreateMissionRequest(
-    ::flatbuffers::FlatBufferBuilder &_fbb,
-    ::flatbuffers::Offset<::flatbuffers::String> uav_id = 0,
-    ::flatbuffers::Offset<::flatbuffers::String> mission_id = 0,
-    int32_t mission_type = 0,
-    ::flatbuffers::Offset<::flatbuffers::Vector<::flatbuffers::Offset<fb::sensor_msgs::NavSatFix>>> waypoint = 0,
-    double radius = 0.0,
-    double maxVel = 0.0,
-    double idleVel = 0.0,
-    ::flatbuffers::Offset<::flatbuffers::Vector<float>> yaw = 0,
-    ::flatbuffers::Offset<::flatbuffers::Vector<float>> gimbalPitch = 0,
-    ::flatbuffers::Offset<::flatbuffers::Vector<float>> speed = 0,
-    int32_t yawMode = 0,
-    int32_t traceMode = 0,
-    int32_t gimbalPitchMode = 0,
-    int32_t finishAction = 0,
-    ::flatbuffers::Offset<::flatbuffers::Vector<float>> commandList = 0,
-    ::flatbuffers::Offset<::flatbuffers::Vector<float>> commandParameter = 0) {
-  MissionRequestBuilder builder_(_fbb);
-  builder_.add_idleVel(idleVel);
-  builder_.add_maxVel(maxVel);
-  builder_.add_radius(radius);
-  builder_.add_commandParameter(commandParameter);
-  builder_.add_commandList(commandList);
-  builder_.add_finishAction(finishAction);
-  builder_.add_gimbalPitchMode(gimbalPitchMode);
-  builder_.add_traceMode(traceMode);
-  builder_.add_yawMode(yawMode);
-  builder_.add_speed(speed);
-  builder_.add_gimbalPitch(gimbalPitch);
-  builder_.add_yaw(yaw);
-  builder_.add_waypoint(waypoint);
-  builder_.add_mission_type(mission_type);
-  builder_.add_mission_id(mission_id);
-  builder_.add_uav_id(uav_id);
-  return builder_.Finish();
-}
-
-inline ::flatbuffers::Offset<MissionRequest> CreateMissionRequestDirect(
-    ::flatbuffers::FlatBufferBuilder &_fbb,
-    const char *uav_id = nullptr,
-    const char *mission_id = nullptr,
-    int32_t mission_type = 0,
-    const std::vector<::flatbuffers::Offset<fb::sensor_msgs::NavSatFix>> *waypoint = nullptr,
-    double radius = 0.0,
-    double maxVel = 0.0,
-    double idleVel = 0.0,
-    const std::vector<float> *yaw = nullptr,
-    const std::vector<float> *gimbalPitch = nullptr,
-    const std::vector<float> *speed = nullptr,
-    int32_t yawMode = 0,
-    int32_t traceMode = 0,
-    int32_t gimbalPitchMode = 0,
-    int32_t finishAction = 0,
-    const std::vector<float> *commandList = nullptr,
-    const std::vector<float> *commandParameter = nullptr) {
-  auto uav_id__ = uav_id ? _fbb.CreateString(uav_id) : 0;
-  auto mission_id__ = mission_id ? _fbb.CreateString(mission_id) : 0;
-  auto waypoint__ = waypoint ? _fbb.CreateVector<::flatbuffers::Offset<fb::sensor_msgs::NavSatFix>>(*waypoint) : 0;
-  auto yaw__ = yaw ? _fbb.CreateVector<float>(*yaw) : 0;
-  auto gimbalPitch__ = gimbalPitch ? _fbb.CreateVector<float>(*gimbalPitch) : 0;
-  auto speed__ = speed ? _fbb.CreateVector<float>(*speed) : 0;
-  auto commandList__ = commandList ? _fbb.CreateVector<float>(*commandList) : 0;
-  auto commandParameter__ = commandParameter ? _fbb.CreateVector<float>(*commandParameter) : 0;
-  return fb::mission_msgs::CreateMissionRequest(
-      _fbb,
-      uav_id__,
-      mission_id__,
-      mission_type,
-      waypoint__,
-      radius,
-      maxVel,
-      idleVel,
-      yaw__,
-      gimbalPitch__,
-      speed__,
-      yawMode,
-      traceMode,
-      gimbalPitchMode,
-      finishAction,
-      commandList__,
-      commandParameter__);
-}
-
-struct eventRequest FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
-  typedef eventRequestBuilder Builder;
-  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
-    VT_UAV_ID = 4,
-    VT_DATA = 6
-  };
-  const ::flatbuffers::String *uav_id() const {
-    return GetPointer<const ::flatbuffers::String *>(VT_UAV_ID);
-  }
-  const ::flatbuffers::String *data() const {
-    return GetPointer<const ::flatbuffers::String *>(VT_DATA);
-  }
-  bool Verify(::flatbuffers::Verifier &verifier) const {
-    return VerifyTableStart(verifier) &&
-           VerifyOffset(verifier, VT_UAV_ID) &&
-           verifier.VerifyString(uav_id()) &&
-           VerifyOffset(verifier, VT_DATA) &&
-           verifier.VerifyString(data()) &&
-           verifier.EndTable();
-  }
-};
-
-struct eventRequestBuilder {
-  typedef eventRequest Table;
-  ::flatbuffers::FlatBufferBuilder &fbb_;
-  ::flatbuffers::uoffset_t start_;
-  void add_uav_id(::flatbuffers::Offset<::flatbuffers::String> uav_id) {
-    fbb_.AddOffset(eventRequest::VT_UAV_ID, uav_id);
-  }
-  void add_data(::flatbuffers::Offset<::flatbuffers::String> data) {
-    fbb_.AddOffset(eventRequest::VT_DATA, data);
-  }
-  explicit eventRequestBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
-        : fbb_(_fbb) {
-    start_ = fbb_.StartTable();
-  }
-  ::flatbuffers::Offset<eventRequest> Finish() {
-    const auto end = fbb_.EndTable(start_);
-    auto o = ::flatbuffers::Offset<eventRequest>(end);
-    return o;
-  }
-};
-
-inline ::flatbuffers::Offset<eventRequest> CreateeventRequest(
-    ::flatbuffers::FlatBufferBuilder &_fbb,
-    ::flatbuffers::Offset<::flatbuffers::String> uav_id = 0,
-    ::flatbuffers::Offset<::flatbuffers::String> data = 0) {
-  eventRequestBuilder builder_(_fbb);
-  builder_.add_data(data);
-  builder_.add_uav_id(uav_id);
-  return builder_.Finish();
-}
-
-inline ::flatbuffers::Offset<eventRequest> CreateeventRequestDirect(
-    ::flatbuffers::FlatBufferBuilder &_fbb,
-    const char *uav_id = nullptr,
-    const char *data = nullptr) {
-  auto uav_id__ = uav_id ? _fbb.CreateString(uav_id) : 0;
-  auto data__ = data ? _fbb.CreateString(data) : 0;
-  return fb::mission_msgs::CreateeventRequest(
-      _fbb,
-      uav_id__,
-      data__);
-}
-
-struct eventResponse FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
-  typedef eventResponseBuilder Builder;
-  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
-    VT_SUCCESS = 4,
-    VT_MSG = 6
-  };
-  bool success() const {
-    return GetField<uint8_t>(VT_SUCCESS, 0) != 0;
-  }
-  const ::flatbuffers::String *msg() const {
-    return GetPointer<const ::flatbuffers::String *>(VT_MSG);
-  }
-  bool Verify(::flatbuffers::Verifier &verifier) const {
-    return VerifyTableStart(verifier) &&
-           VerifyField<uint8_t>(verifier, VT_SUCCESS, 1) &&
-           VerifyOffset(verifier, VT_MSG) &&
-           verifier.VerifyString(msg()) &&
-           verifier.EndTable();
-  }
-};
-
-struct eventResponseBuilder {
-  typedef eventResponse Table;
-  ::flatbuffers::FlatBufferBuilder &fbb_;
-  ::flatbuffers::uoffset_t start_;
-  void add_success(bool success) {
-    fbb_.AddElement<uint8_t>(eventResponse::VT_SUCCESS, static_cast<uint8_t>(success), 0);
-  }
-  void add_msg(::flatbuffers::Offset<::flatbuffers::String> msg) {
-    fbb_.AddOffset(eventResponse::VT_MSG, msg);
-  }
-  explicit eventResponseBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
-        : fbb_(_fbb) {
-    start_ = fbb_.StartTable();
-  }
-  ::flatbuffers::Offset<eventResponse> Finish() {
-    const auto end = fbb_.EndTable(start_);
-    auto o = ::flatbuffers::Offset<eventResponse>(end);
-    return o;
-  }
-};
-
-inline ::flatbuffers::Offset<eventResponse> CreateeventResponse(
-    ::flatbuffers::FlatBufferBuilder &_fbb,
-    bool success = false,
-    ::flatbuffers::Offset<::flatbuffers::String> msg = 0) {
-  eventResponseBuilder builder_(_fbb);
-  builder_.add_msg(msg);
-  builder_.add_success(success);
-  return builder_.Finish();
-}
-
-inline ::flatbuffers::Offset<eventResponse> CreateeventResponseDirect(
-    ::flatbuffers::FlatBufferBuilder &_fbb,
-    bool success = false,
-    const char *msg = nullptr) {
-  auto msg__ = msg ? _fbb.CreateString(msg) : 0;
-  return fb::mission_msgs::CreateeventResponse(
-      _fbb,
-      success,
-      msg__);
-}
-
-}  // namespace mission_msgs
 
 namespace amrl_msgs {
 
@@ -3810,6 +3743,1254 @@ inline ::flatbuffers::Offset<Odometry> CreateOdometryDirect(
 
 }  // namespace nav_msgs
 
+namespace std_srvs {
+
+struct Empty FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef EmptyBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT___METADATA = 4,
+    VT_REQUEST = 6,
+    VT_RESPONSE = 8
+  };
+  const fb::MsgMetadata *__metadata() const {
+    return GetPointer<const fb::MsgMetadata *>(VT___METADATA);
+  }
+  const fb::std_srvs::EmptyRequest *request() const {
+    return GetPointer<const fb::std_srvs::EmptyRequest *>(VT_REQUEST);
+  }
+  const fb::std_srvs::EmptyResponse *response() const {
+    return GetPointer<const fb::std_srvs::EmptyResponse *>(VT_RESPONSE);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT___METADATA) &&
+           verifier.VerifyTable(__metadata()) &&
+           VerifyOffset(verifier, VT_REQUEST) &&
+           verifier.VerifyTable(request()) &&
+           VerifyOffset(verifier, VT_RESPONSE) &&
+           verifier.VerifyTable(response()) &&
+           verifier.EndTable();
+  }
+};
+
+struct EmptyBuilder {
+  typedef Empty Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add___metadata(::flatbuffers::Offset<fb::MsgMetadata> __metadata) {
+    fbb_.AddOffset(Empty::VT___METADATA, __metadata);
+  }
+  void add_request(::flatbuffers::Offset<fb::std_srvs::EmptyRequest> request) {
+    fbb_.AddOffset(Empty::VT_REQUEST, request);
+  }
+  void add_response(::flatbuffers::Offset<fb::std_srvs::EmptyResponse> response) {
+    fbb_.AddOffset(Empty::VT_RESPONSE, response);
+  }
+  explicit EmptyBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<Empty> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<Empty>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<Empty> CreateEmpty(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    ::flatbuffers::Offset<fb::std_srvs::EmptyRequest> request = 0,
+    ::flatbuffers::Offset<fb::std_srvs::EmptyResponse> response = 0) {
+  EmptyBuilder builder_(_fbb);
+  builder_.add_response(response);
+  builder_.add_request(request);
+  builder_.add___metadata(__metadata);
+  return builder_.Finish();
+}
+
+struct EmptyRequest FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef EmptyRequestBuilder Builder;
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           verifier.EndTable();
+  }
+};
+
+struct EmptyRequestBuilder {
+  typedef EmptyRequest Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  explicit EmptyRequestBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<EmptyRequest> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<EmptyRequest>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<EmptyRequest> CreateEmptyRequest(
+    ::flatbuffers::FlatBufferBuilder &_fbb) {
+  EmptyRequestBuilder builder_(_fbb);
+  return builder_.Finish();
+}
+
+struct EmptyResponse FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef EmptyResponseBuilder Builder;
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           verifier.EndTable();
+  }
+};
+
+struct EmptyResponseBuilder {
+  typedef EmptyResponse Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  explicit EmptyResponseBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<EmptyResponse> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<EmptyResponse>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<EmptyResponse> CreateEmptyResponse(
+    ::flatbuffers::FlatBufferBuilder &_fbb) {
+  EmptyResponseBuilder builder_(_fbb);
+  return builder_.Finish();
+}
+
+struct Trigger FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef TriggerBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT___METADATA = 4,
+    VT_REQUEST = 6,
+    VT_RESPONSE = 8
+  };
+  const fb::MsgMetadata *__metadata() const {
+    return GetPointer<const fb::MsgMetadata *>(VT___METADATA);
+  }
+  const fb::std_srvs::TriggerRequest *request() const {
+    return GetPointer<const fb::std_srvs::TriggerRequest *>(VT_REQUEST);
+  }
+  const fb::std_srvs::TriggerResponse *response() const {
+    return GetPointer<const fb::std_srvs::TriggerResponse *>(VT_RESPONSE);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT___METADATA) &&
+           verifier.VerifyTable(__metadata()) &&
+           VerifyOffset(verifier, VT_REQUEST) &&
+           verifier.VerifyTable(request()) &&
+           VerifyOffset(verifier, VT_RESPONSE) &&
+           verifier.VerifyTable(response()) &&
+           verifier.EndTable();
+  }
+};
+
+struct TriggerBuilder {
+  typedef Trigger Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add___metadata(::flatbuffers::Offset<fb::MsgMetadata> __metadata) {
+    fbb_.AddOffset(Trigger::VT___METADATA, __metadata);
+  }
+  void add_request(::flatbuffers::Offset<fb::std_srvs::TriggerRequest> request) {
+    fbb_.AddOffset(Trigger::VT_REQUEST, request);
+  }
+  void add_response(::flatbuffers::Offset<fb::std_srvs::TriggerResponse> response) {
+    fbb_.AddOffset(Trigger::VT_RESPONSE, response);
+  }
+  explicit TriggerBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<Trigger> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<Trigger>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<Trigger> CreateTrigger(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    ::flatbuffers::Offset<fb::std_srvs::TriggerRequest> request = 0,
+    ::flatbuffers::Offset<fb::std_srvs::TriggerResponse> response = 0) {
+  TriggerBuilder builder_(_fbb);
+  builder_.add_response(response);
+  builder_.add_request(request);
+  builder_.add___metadata(__metadata);
+  return builder_.Finish();
+}
+
+struct TriggerRequest FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef TriggerRequestBuilder Builder;
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           verifier.EndTable();
+  }
+};
+
+struct TriggerRequestBuilder {
+  typedef TriggerRequest Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  explicit TriggerRequestBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<TriggerRequest> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<TriggerRequest>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<TriggerRequest> CreateTriggerRequest(
+    ::flatbuffers::FlatBufferBuilder &_fbb) {
+  TriggerRequestBuilder builder_(_fbb);
+  return builder_.Finish();
+}
+
+struct TriggerResponse FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef TriggerResponseBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_SUCCESS = 4,
+    VT_MESSAGE = 6
+  };
+  bool success() const {
+    return GetField<uint8_t>(VT_SUCCESS, 0) != 0;
+  }
+  const ::flatbuffers::String *message() const {
+    return GetPointer<const ::flatbuffers::String *>(VT_MESSAGE);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint8_t>(verifier, VT_SUCCESS, 1) &&
+           VerifyOffset(verifier, VT_MESSAGE) &&
+           verifier.VerifyString(message()) &&
+           verifier.EndTable();
+  }
+};
+
+struct TriggerResponseBuilder {
+  typedef TriggerResponse Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add_success(bool success) {
+    fbb_.AddElement<uint8_t>(TriggerResponse::VT_SUCCESS, static_cast<uint8_t>(success), 0);
+  }
+  void add_message(::flatbuffers::Offset<::flatbuffers::String> message) {
+    fbb_.AddOffset(TriggerResponse::VT_MESSAGE, message);
+  }
+  explicit TriggerResponseBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<TriggerResponse> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<TriggerResponse>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<TriggerResponse> CreateTriggerResponse(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    bool success = false,
+    ::flatbuffers::Offset<::flatbuffers::String> message = 0) {
+  TriggerResponseBuilder builder_(_fbb);
+  builder_.add_message(message);
+  builder_.add_success(success);
+  return builder_.Finish();
+}
+
+inline ::flatbuffers::Offset<TriggerResponse> CreateTriggerResponseDirect(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    bool success = false,
+    const char *message = nullptr) {
+  auto message__ = message ? _fbb.CreateString(message) : 0;
+  return fb::std_srvs::CreateTriggerResponse(
+      _fbb,
+      success,
+      message__);
+}
+
+struct SetBool FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef SetBoolBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT___METADATA = 4,
+    VT_REQUEST = 6,
+    VT_RESPONSE = 8
+  };
+  const fb::MsgMetadata *__metadata() const {
+    return GetPointer<const fb::MsgMetadata *>(VT___METADATA);
+  }
+  const fb::std_srvs::SetBoolRequest *request() const {
+    return GetPointer<const fb::std_srvs::SetBoolRequest *>(VT_REQUEST);
+  }
+  const fb::std_srvs::SetBoolResponse *response() const {
+    return GetPointer<const fb::std_srvs::SetBoolResponse *>(VT_RESPONSE);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT___METADATA) &&
+           verifier.VerifyTable(__metadata()) &&
+           VerifyOffset(verifier, VT_REQUEST) &&
+           verifier.VerifyTable(request()) &&
+           VerifyOffset(verifier, VT_RESPONSE) &&
+           verifier.VerifyTable(response()) &&
+           verifier.EndTable();
+  }
+};
+
+struct SetBoolBuilder {
+  typedef SetBool Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add___metadata(::flatbuffers::Offset<fb::MsgMetadata> __metadata) {
+    fbb_.AddOffset(SetBool::VT___METADATA, __metadata);
+  }
+  void add_request(::flatbuffers::Offset<fb::std_srvs::SetBoolRequest> request) {
+    fbb_.AddOffset(SetBool::VT_REQUEST, request);
+  }
+  void add_response(::flatbuffers::Offset<fb::std_srvs::SetBoolResponse> response) {
+    fbb_.AddOffset(SetBool::VT_RESPONSE, response);
+  }
+  explicit SetBoolBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<SetBool> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<SetBool>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<SetBool> CreateSetBool(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    ::flatbuffers::Offset<fb::std_srvs::SetBoolRequest> request = 0,
+    ::flatbuffers::Offset<fb::std_srvs::SetBoolResponse> response = 0) {
+  SetBoolBuilder builder_(_fbb);
+  builder_.add_response(response);
+  builder_.add_request(request);
+  builder_.add___metadata(__metadata);
+  return builder_.Finish();
+}
+
+struct SetBoolRequest FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef SetBoolRequestBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_DATA = 4
+  };
+  bool data() const {
+    return GetField<uint8_t>(VT_DATA, 0) != 0;
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint8_t>(verifier, VT_DATA, 1) &&
+           verifier.EndTable();
+  }
+};
+
+struct SetBoolRequestBuilder {
+  typedef SetBoolRequest Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add_data(bool data) {
+    fbb_.AddElement<uint8_t>(SetBoolRequest::VT_DATA, static_cast<uint8_t>(data), 0);
+  }
+  explicit SetBoolRequestBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<SetBoolRequest> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<SetBoolRequest>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<SetBoolRequest> CreateSetBoolRequest(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    bool data = false) {
+  SetBoolRequestBuilder builder_(_fbb);
+  builder_.add_data(data);
+  return builder_.Finish();
+}
+
+struct SetBoolResponse FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef SetBoolResponseBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_SUCCESS = 4,
+    VT_MESSAGE = 6
+  };
+  bool success() const {
+    return GetField<uint8_t>(VT_SUCCESS, 0) != 0;
+  }
+  const ::flatbuffers::String *message() const {
+    return GetPointer<const ::flatbuffers::String *>(VT_MESSAGE);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint8_t>(verifier, VT_SUCCESS, 1) &&
+           VerifyOffset(verifier, VT_MESSAGE) &&
+           verifier.VerifyString(message()) &&
+           verifier.EndTable();
+  }
+};
+
+struct SetBoolResponseBuilder {
+  typedef SetBoolResponse Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add_success(bool success) {
+    fbb_.AddElement<uint8_t>(SetBoolResponse::VT_SUCCESS, static_cast<uint8_t>(success), 0);
+  }
+  void add_message(::flatbuffers::Offset<::flatbuffers::String> message) {
+    fbb_.AddOffset(SetBoolResponse::VT_MESSAGE, message);
+  }
+  explicit SetBoolResponseBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<SetBoolResponse> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<SetBoolResponse>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<SetBoolResponse> CreateSetBoolResponse(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    bool success = false,
+    ::flatbuffers::Offset<::flatbuffers::String> message = 0) {
+  SetBoolResponseBuilder builder_(_fbb);
+  builder_.add_message(message);
+  builder_.add_success(success);
+  return builder_.Finish();
+}
+
+inline ::flatbuffers::Offset<SetBoolResponse> CreateSetBoolResponseDirect(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    bool success = false,
+    const char *message = nullptr) {
+  auto message__ = message ? _fbb.CreateString(message) : 0;
+  return fb::std_srvs::CreateSetBoolResponse(
+      _fbb,
+      success,
+      message__);
+}
+
+}  // namespace std_srvs
+
+namespace aerialcore_common {
+
+struct ConfigMission FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef ConfigMissionBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT___METADATA = 4,
+    VT_REQUEST = 6,
+    VT_RESPONSE = 8
+  };
+  const fb::MsgMetadata *__metadata() const {
+    return GetPointer<const fb::MsgMetadata *>(VT___METADATA);
+  }
+  const fb::aerialcore_common::ConfigMissionRequest *request() const {
+    return GetPointer<const fb::aerialcore_common::ConfigMissionRequest *>(VT_REQUEST);
+  }
+  const fb::aerialcore_common::ConfigMissionResponse *response() const {
+    return GetPointer<const fb::aerialcore_common::ConfigMissionResponse *>(VT_RESPONSE);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT___METADATA) &&
+           verifier.VerifyTable(__metadata()) &&
+           VerifyOffset(verifier, VT_REQUEST) &&
+           verifier.VerifyTable(request()) &&
+           VerifyOffset(verifier, VT_RESPONSE) &&
+           verifier.VerifyTable(response()) &&
+           verifier.EndTable();
+  }
+};
+
+struct ConfigMissionBuilder {
+  typedef ConfigMission Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add___metadata(::flatbuffers::Offset<fb::MsgMetadata> __metadata) {
+    fbb_.AddOffset(ConfigMission::VT___METADATA, __metadata);
+  }
+  void add_request(::flatbuffers::Offset<fb::aerialcore_common::ConfigMissionRequest> request) {
+    fbb_.AddOffset(ConfigMission::VT_REQUEST, request);
+  }
+  void add_response(::flatbuffers::Offset<fb::aerialcore_common::ConfigMissionResponse> response) {
+    fbb_.AddOffset(ConfigMission::VT_RESPONSE, response);
+  }
+  explicit ConfigMissionBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<ConfigMission> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<ConfigMission>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<ConfigMission> CreateConfigMission(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    ::flatbuffers::Offset<fb::aerialcore_common::ConfigMissionRequest> request = 0,
+    ::flatbuffers::Offset<fb::aerialcore_common::ConfigMissionResponse> response = 0) {
+  ConfigMissionBuilder builder_(_fbb);
+  builder_.add_response(response);
+  builder_.add_request(request);
+  builder_.add___metadata(__metadata);
+  return builder_.Finish();
+}
+
+struct ConfigMissionRequest FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef ConfigMissionRequestBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_UAV_ID = 4,
+    VT_MISSION_ID = 6,
+    VT_MISSION_TYPE = 8,
+    VT_WAYPOINT = 10,
+    VT_RADIUS = 12,
+    VT_MAXVEL = 14,
+    VT_IDLEVEL = 16,
+    VT_YAW = 18,
+    VT_GIMBALPITCH = 20,
+    VT_SPEED = 22,
+    VT_YAWMODE = 24,
+    VT_TRACEMODE = 26,
+    VT_GIMBALPITCHMODE = 28,
+    VT_FINISHACTION = 30,
+    VT_COMMANDLIST = 32,
+    VT_COMMANDPARAMETER = 34
+  };
+  const ::flatbuffers::String *uav_id() const {
+    return GetPointer<const ::flatbuffers::String *>(VT_UAV_ID);
+  }
+  const ::flatbuffers::String *mission_id() const {
+    return GetPointer<const ::flatbuffers::String *>(VT_MISSION_ID);
+  }
+  uint8_t mission_type() const {
+    return GetField<uint8_t>(VT_MISSION_TYPE, 0);
+  }
+  const ::flatbuffers::Vector<::flatbuffers::Offset<fb::sensor_msgs::NavSatFix>> *waypoint() const {
+    return GetPointer<const ::flatbuffers::Vector<::flatbuffers::Offset<fb::sensor_msgs::NavSatFix>> *>(VT_WAYPOINT);
+  }
+  double radius() const {
+    return GetField<double>(VT_RADIUS, 0.0);
+  }
+  double maxVel() const {
+    return GetField<double>(VT_MAXVEL, 0.0);
+  }
+  double idleVel() const {
+    return GetField<double>(VT_IDLEVEL, 0.0);
+  }
+  const ::flatbuffers::Vector<float> *yaw() const {
+    return GetPointer<const ::flatbuffers::Vector<float> *>(VT_YAW);
+  }
+  const ::flatbuffers::Vector<float> *gimbalPitch() const {
+    return GetPointer<const ::flatbuffers::Vector<float> *>(VT_GIMBALPITCH);
+  }
+  const ::flatbuffers::Vector<float> *speed() const {
+    return GetPointer<const ::flatbuffers::Vector<float> *>(VT_SPEED);
+  }
+  uint8_t yawMode() const {
+    return GetField<uint8_t>(VT_YAWMODE, 0);
+  }
+  uint8_t traceMode() const {
+    return GetField<uint8_t>(VT_TRACEMODE, 0);
+  }
+  uint8_t gimbalPitchMode() const {
+    return GetField<uint8_t>(VT_GIMBALPITCHMODE, 0);
+  }
+  uint8_t finishAction() const {
+    return GetField<uint8_t>(VT_FINISHACTION, 0);
+  }
+  const ::flatbuffers::Vector<float> *commandList() const {
+    return GetPointer<const ::flatbuffers::Vector<float> *>(VT_COMMANDLIST);
+  }
+  const ::flatbuffers::Vector<float> *commandParameter() const {
+    return GetPointer<const ::flatbuffers::Vector<float> *>(VT_COMMANDPARAMETER);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT_UAV_ID) &&
+           verifier.VerifyString(uav_id()) &&
+           VerifyOffset(verifier, VT_MISSION_ID) &&
+           verifier.VerifyString(mission_id()) &&
+           VerifyField<uint8_t>(verifier, VT_MISSION_TYPE, 1) &&
+           VerifyOffset(verifier, VT_WAYPOINT) &&
+           verifier.VerifyVector(waypoint()) &&
+           verifier.VerifyVectorOfTables(waypoint()) &&
+           VerifyField<double>(verifier, VT_RADIUS, 8) &&
+           VerifyField<double>(verifier, VT_MAXVEL, 8) &&
+           VerifyField<double>(verifier, VT_IDLEVEL, 8) &&
+           VerifyOffset(verifier, VT_YAW) &&
+           verifier.VerifyVector(yaw()) &&
+           VerifyOffset(verifier, VT_GIMBALPITCH) &&
+           verifier.VerifyVector(gimbalPitch()) &&
+           VerifyOffset(verifier, VT_SPEED) &&
+           verifier.VerifyVector(speed()) &&
+           VerifyField<uint8_t>(verifier, VT_YAWMODE, 1) &&
+           VerifyField<uint8_t>(verifier, VT_TRACEMODE, 1) &&
+           VerifyField<uint8_t>(verifier, VT_GIMBALPITCHMODE, 1) &&
+           VerifyField<uint8_t>(verifier, VT_FINISHACTION, 1) &&
+           VerifyOffset(verifier, VT_COMMANDLIST) &&
+           verifier.VerifyVector(commandList()) &&
+           VerifyOffset(verifier, VT_COMMANDPARAMETER) &&
+           verifier.VerifyVector(commandParameter()) &&
+           verifier.EndTable();
+  }
+};
+
+struct ConfigMissionRequestBuilder {
+  typedef ConfigMissionRequest Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add_uav_id(::flatbuffers::Offset<::flatbuffers::String> uav_id) {
+    fbb_.AddOffset(ConfigMissionRequest::VT_UAV_ID, uav_id);
+  }
+  void add_mission_id(::flatbuffers::Offset<::flatbuffers::String> mission_id) {
+    fbb_.AddOffset(ConfigMissionRequest::VT_MISSION_ID, mission_id);
+  }
+  void add_mission_type(uint8_t mission_type) {
+    fbb_.AddElement<uint8_t>(ConfigMissionRequest::VT_MISSION_TYPE, mission_type, 0);
+  }
+  void add_waypoint(::flatbuffers::Offset<::flatbuffers::Vector<::flatbuffers::Offset<fb::sensor_msgs::NavSatFix>>> waypoint) {
+    fbb_.AddOffset(ConfigMissionRequest::VT_WAYPOINT, waypoint);
+  }
+  void add_radius(double radius) {
+    fbb_.AddElement<double>(ConfigMissionRequest::VT_RADIUS, radius, 0.0);
+  }
+  void add_maxVel(double maxVel) {
+    fbb_.AddElement<double>(ConfigMissionRequest::VT_MAXVEL, maxVel, 0.0);
+  }
+  void add_idleVel(double idleVel) {
+    fbb_.AddElement<double>(ConfigMissionRequest::VT_IDLEVEL, idleVel, 0.0);
+  }
+  void add_yaw(::flatbuffers::Offset<::flatbuffers::Vector<float>> yaw) {
+    fbb_.AddOffset(ConfigMissionRequest::VT_YAW, yaw);
+  }
+  void add_gimbalPitch(::flatbuffers::Offset<::flatbuffers::Vector<float>> gimbalPitch) {
+    fbb_.AddOffset(ConfigMissionRequest::VT_GIMBALPITCH, gimbalPitch);
+  }
+  void add_speed(::flatbuffers::Offset<::flatbuffers::Vector<float>> speed) {
+    fbb_.AddOffset(ConfigMissionRequest::VT_SPEED, speed);
+  }
+  void add_yawMode(uint8_t yawMode) {
+    fbb_.AddElement<uint8_t>(ConfigMissionRequest::VT_YAWMODE, yawMode, 0);
+  }
+  void add_traceMode(uint8_t traceMode) {
+    fbb_.AddElement<uint8_t>(ConfigMissionRequest::VT_TRACEMODE, traceMode, 0);
+  }
+  void add_gimbalPitchMode(uint8_t gimbalPitchMode) {
+    fbb_.AddElement<uint8_t>(ConfigMissionRequest::VT_GIMBALPITCHMODE, gimbalPitchMode, 0);
+  }
+  void add_finishAction(uint8_t finishAction) {
+    fbb_.AddElement<uint8_t>(ConfigMissionRequest::VT_FINISHACTION, finishAction, 0);
+  }
+  void add_commandList(::flatbuffers::Offset<::flatbuffers::Vector<float>> commandList) {
+    fbb_.AddOffset(ConfigMissionRequest::VT_COMMANDLIST, commandList);
+  }
+  void add_commandParameter(::flatbuffers::Offset<::flatbuffers::Vector<float>> commandParameter) {
+    fbb_.AddOffset(ConfigMissionRequest::VT_COMMANDPARAMETER, commandParameter);
+  }
+  explicit ConfigMissionRequestBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<ConfigMissionRequest> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<ConfigMissionRequest>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<ConfigMissionRequest> CreateConfigMissionRequest(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<::flatbuffers::String> uav_id = 0,
+    ::flatbuffers::Offset<::flatbuffers::String> mission_id = 0,
+    uint8_t mission_type = 0,
+    ::flatbuffers::Offset<::flatbuffers::Vector<::flatbuffers::Offset<fb::sensor_msgs::NavSatFix>>> waypoint = 0,
+    double radius = 0.0,
+    double maxVel = 0.0,
+    double idleVel = 0.0,
+    ::flatbuffers::Offset<::flatbuffers::Vector<float>> yaw = 0,
+    ::flatbuffers::Offset<::flatbuffers::Vector<float>> gimbalPitch = 0,
+    ::flatbuffers::Offset<::flatbuffers::Vector<float>> speed = 0,
+    uint8_t yawMode = 0,
+    uint8_t traceMode = 0,
+    uint8_t gimbalPitchMode = 0,
+    uint8_t finishAction = 0,
+    ::flatbuffers::Offset<::flatbuffers::Vector<float>> commandList = 0,
+    ::flatbuffers::Offset<::flatbuffers::Vector<float>> commandParameter = 0) {
+  ConfigMissionRequestBuilder builder_(_fbb);
+  builder_.add_idleVel(idleVel);
+  builder_.add_maxVel(maxVel);
+  builder_.add_radius(radius);
+  builder_.add_commandParameter(commandParameter);
+  builder_.add_commandList(commandList);
+  builder_.add_speed(speed);
+  builder_.add_gimbalPitch(gimbalPitch);
+  builder_.add_yaw(yaw);
+  builder_.add_waypoint(waypoint);
+  builder_.add_mission_id(mission_id);
+  builder_.add_uav_id(uav_id);
+  builder_.add_finishAction(finishAction);
+  builder_.add_gimbalPitchMode(gimbalPitchMode);
+  builder_.add_traceMode(traceMode);
+  builder_.add_yawMode(yawMode);
+  builder_.add_mission_type(mission_type);
+  return builder_.Finish();
+}
+
+inline ::flatbuffers::Offset<ConfigMissionRequest> CreateConfigMissionRequestDirect(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    const char *uav_id = nullptr,
+    const char *mission_id = nullptr,
+    uint8_t mission_type = 0,
+    const std::vector<::flatbuffers::Offset<fb::sensor_msgs::NavSatFix>> *waypoint = nullptr,
+    double radius = 0.0,
+    double maxVel = 0.0,
+    double idleVel = 0.0,
+    const std::vector<float> *yaw = nullptr,
+    const std::vector<float> *gimbalPitch = nullptr,
+    const std::vector<float> *speed = nullptr,
+    uint8_t yawMode = 0,
+    uint8_t traceMode = 0,
+    uint8_t gimbalPitchMode = 0,
+    uint8_t finishAction = 0,
+    const std::vector<float> *commandList = nullptr,
+    const std::vector<float> *commandParameter = nullptr) {
+  auto uav_id__ = uav_id ? _fbb.CreateString(uav_id) : 0;
+  auto mission_id__ = mission_id ? _fbb.CreateString(mission_id) : 0;
+  auto waypoint__ = waypoint ? _fbb.CreateVector<::flatbuffers::Offset<fb::sensor_msgs::NavSatFix>>(*waypoint) : 0;
+  auto yaw__ = yaw ? _fbb.CreateVector<float>(*yaw) : 0;
+  auto gimbalPitch__ = gimbalPitch ? _fbb.CreateVector<float>(*gimbalPitch) : 0;
+  auto speed__ = speed ? _fbb.CreateVector<float>(*speed) : 0;
+  auto commandList__ = commandList ? _fbb.CreateVector<float>(*commandList) : 0;
+  auto commandParameter__ = commandParameter ? _fbb.CreateVector<float>(*commandParameter) : 0;
+  return fb::aerialcore_common::CreateConfigMissionRequest(
+      _fbb,
+      uav_id__,
+      mission_id__,
+      mission_type,
+      waypoint__,
+      radius,
+      maxVel,
+      idleVel,
+      yaw__,
+      gimbalPitch__,
+      speed__,
+      yawMode,
+      traceMode,
+      gimbalPitchMode,
+      finishAction,
+      commandList__,
+      commandParameter__);
+}
+
+struct ConfigMissionResponse FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef ConfigMissionResponseBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_SUCCESS = 4
+  };
+  bool success() const {
+    return GetField<uint8_t>(VT_SUCCESS, 0) != 0;
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint8_t>(verifier, VT_SUCCESS, 1) &&
+           verifier.EndTable();
+  }
+};
+
+struct ConfigMissionResponseBuilder {
+  typedef ConfigMissionResponse Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add_success(bool success) {
+    fbb_.AddElement<uint8_t>(ConfigMissionResponse::VT_SUCCESS, static_cast<uint8_t>(success), 0);
+  }
+  explicit ConfigMissionResponseBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<ConfigMissionResponse> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<ConfigMissionResponse>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<ConfigMissionResponse> CreateConfigMissionResponse(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    bool success = false) {
+  ConfigMissionResponseBuilder builder_(_fbb);
+  builder_.add_success(success);
+  return builder_.Finish();
+}
+
+struct eventRequest FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef eventRequestBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT___METADATA = 4,
+    VT_UAV_ID = 6,
+    VT_DATA = 8
+  };
+  const fb::MsgMetadata *__metadata() const {
+    return GetPointer<const fb::MsgMetadata *>(VT___METADATA);
+  }
+  const ::flatbuffers::String *uav_id() const {
+    return GetPointer<const ::flatbuffers::String *>(VT_UAV_ID);
+  }
+  const ::flatbuffers::String *data() const {
+    return GetPointer<const ::flatbuffers::String *>(VT_DATA);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT___METADATA) &&
+           verifier.VerifyTable(__metadata()) &&
+           VerifyOffset(verifier, VT_UAV_ID) &&
+           verifier.VerifyString(uav_id()) &&
+           VerifyOffset(verifier, VT_DATA) &&
+           verifier.VerifyString(data()) &&
+           verifier.EndTable();
+  }
+};
+
+struct eventRequestBuilder {
+  typedef eventRequest Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add___metadata(::flatbuffers::Offset<fb::MsgMetadata> __metadata) {
+    fbb_.AddOffset(eventRequest::VT___METADATA, __metadata);
+  }
+  void add_uav_id(::flatbuffers::Offset<::flatbuffers::String> uav_id) {
+    fbb_.AddOffset(eventRequest::VT_UAV_ID, uav_id);
+  }
+  void add_data(::flatbuffers::Offset<::flatbuffers::String> data) {
+    fbb_.AddOffset(eventRequest::VT_DATA, data);
+  }
+  explicit eventRequestBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<eventRequest> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<eventRequest>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<eventRequest> CreateeventRequest(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    ::flatbuffers::Offset<::flatbuffers::String> uav_id = 0,
+    ::flatbuffers::Offset<::flatbuffers::String> data = 0) {
+  eventRequestBuilder builder_(_fbb);
+  builder_.add_data(data);
+  builder_.add_uav_id(uav_id);
+  builder_.add___metadata(__metadata);
+  return builder_.Finish();
+}
+
+inline ::flatbuffers::Offset<eventRequest> CreateeventRequestDirect(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    const char *uav_id = nullptr,
+    const char *data = nullptr) {
+  auto uav_id__ = uav_id ? _fbb.CreateString(uav_id) : 0;
+  auto data__ = data ? _fbb.CreateString(data) : 0;
+  return fb::aerialcore_common::CreateeventRequest(
+      _fbb,
+      __metadata,
+      uav_id__,
+      data__);
+}
+
+struct eventResponse FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef eventResponseBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT___METADATA = 4,
+    VT_SUCCESS = 6,
+    VT_MSG = 8
+  };
+  const fb::MsgMetadata *__metadata() const {
+    return GetPointer<const fb::MsgMetadata *>(VT___METADATA);
+  }
+  bool success() const {
+    return GetField<uint8_t>(VT_SUCCESS, 0) != 0;
+  }
+  const ::flatbuffers::String *msg() const {
+    return GetPointer<const ::flatbuffers::String *>(VT_MSG);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT___METADATA) &&
+           verifier.VerifyTable(__metadata()) &&
+           VerifyField<uint8_t>(verifier, VT_SUCCESS, 1) &&
+           VerifyOffset(verifier, VT_MSG) &&
+           verifier.VerifyString(msg()) &&
+           verifier.EndTable();
+  }
+};
+
+struct eventResponseBuilder {
+  typedef eventResponse Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add___metadata(::flatbuffers::Offset<fb::MsgMetadata> __metadata) {
+    fbb_.AddOffset(eventResponse::VT___METADATA, __metadata);
+  }
+  void add_success(bool success) {
+    fbb_.AddElement<uint8_t>(eventResponse::VT_SUCCESS, static_cast<uint8_t>(success), 0);
+  }
+  void add_msg(::flatbuffers::Offset<::flatbuffers::String> msg) {
+    fbb_.AddOffset(eventResponse::VT_MSG, msg);
+  }
+  explicit eventResponseBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<eventResponse> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<eventResponse>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<eventResponse> CreateeventResponse(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    bool success = false,
+    ::flatbuffers::Offset<::flatbuffers::String> msg = 0) {
+  eventResponseBuilder builder_(_fbb);
+  builder_.add_msg(msg);
+  builder_.add___metadata(__metadata);
+  builder_.add_success(success);
+  return builder_.Finish();
+}
+
+inline ::flatbuffers::Offset<eventResponse> CreateeventResponseDirect(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    bool success = false,
+    const char *msg = nullptr) {
+  auto msg__ = msg ? _fbb.CreateString(msg) : 0;
+  return fb::aerialcore_common::CreateeventResponse(
+      _fbb,
+      __metadata,
+      success,
+      msg__);
+}
+
+}  // namespace aerialcore_common
+
+namespace dji_osdk_ros {
+
+struct ObstacleInfo FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef ObstacleInfoBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT___METADATA = 4,
+    VT_HEADER = 6,
+    VT_DOWN = 8,
+    VT_FRONT = 10,
+    VT_RIGHT = 12,
+    VT_BACK = 14,
+    VT_LEFT = 16,
+    VT_UP = 18,
+    VT_HEALT_NOT_WORKING = 20,
+    VT_HEALT_WORKING = 22,
+    VT_DOWN_HEALTH = 24,
+    VT_FRONT_HEALTH = 26,
+    VT_RIGHT_HEALTH = 28,
+    VT_BACK_HEALTH = 30,
+    VT_LEFT_HEALTH = 32,
+    VT_UP_HEALTH = 34
+  };
+  const fb::MsgMetadata *__metadata() const {
+    return GetPointer<const fb::MsgMetadata *>(VT___METADATA);
+  }
+  const fb::std_msgs::Header *header() const {
+    return GetPointer<const fb::std_msgs::Header *>(VT_HEADER);
+  }
+  float down() const {
+    return GetField<float>(VT_DOWN, 0.0f);
+  }
+  float front() const {
+    return GetField<float>(VT_FRONT, 0.0f);
+  }
+  float right() const {
+    return GetField<float>(VT_RIGHT, 0.0f);
+  }
+  float back() const {
+    return GetField<float>(VT_BACK, 0.0f);
+  }
+  float left() const {
+    return GetField<float>(VT_LEFT, 0.0f);
+  }
+  float up() const {
+    return GetField<float>(VT_UP, 0.0f);
+  }
+  uint8_t HEALT_NOT_WORKING() const {
+    return GetField<uint8_t>(VT_HEALT_NOT_WORKING, 0);
+  }
+  uint8_t HEALT_WORKING() const {
+    return GetField<uint8_t>(VT_HEALT_WORKING, 1);
+  }
+  uint8_t down_health() const {
+    return GetField<uint8_t>(VT_DOWN_HEALTH, 0);
+  }
+  uint8_t front_health() const {
+    return GetField<uint8_t>(VT_FRONT_HEALTH, 0);
+  }
+  uint8_t right_health() const {
+    return GetField<uint8_t>(VT_RIGHT_HEALTH, 0);
+  }
+  uint8_t back_health() const {
+    return GetField<uint8_t>(VT_BACK_HEALTH, 0);
+  }
+  uint8_t left_health() const {
+    return GetField<uint8_t>(VT_LEFT_HEALTH, 0);
+  }
+  uint8_t up_health() const {
+    return GetField<uint8_t>(VT_UP_HEALTH, 0);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT___METADATA) &&
+           verifier.VerifyTable(__metadata()) &&
+           VerifyOffset(verifier, VT_HEADER) &&
+           verifier.VerifyTable(header()) &&
+           VerifyField<float>(verifier, VT_DOWN, 4) &&
+           VerifyField<float>(verifier, VT_FRONT, 4) &&
+           VerifyField<float>(verifier, VT_RIGHT, 4) &&
+           VerifyField<float>(verifier, VT_BACK, 4) &&
+           VerifyField<float>(verifier, VT_LEFT, 4) &&
+           VerifyField<float>(verifier, VT_UP, 4) &&
+           VerifyField<uint8_t>(verifier, VT_HEALT_NOT_WORKING, 1) &&
+           VerifyField<uint8_t>(verifier, VT_HEALT_WORKING, 1) &&
+           VerifyField<uint8_t>(verifier, VT_DOWN_HEALTH, 1) &&
+           VerifyField<uint8_t>(verifier, VT_FRONT_HEALTH, 1) &&
+           VerifyField<uint8_t>(verifier, VT_RIGHT_HEALTH, 1) &&
+           VerifyField<uint8_t>(verifier, VT_BACK_HEALTH, 1) &&
+           VerifyField<uint8_t>(verifier, VT_LEFT_HEALTH, 1) &&
+           VerifyField<uint8_t>(verifier, VT_UP_HEALTH, 1) &&
+           verifier.EndTable();
+  }
+};
+
+struct ObstacleInfoBuilder {
+  typedef ObstacleInfo Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add___metadata(::flatbuffers::Offset<fb::MsgMetadata> __metadata) {
+    fbb_.AddOffset(ObstacleInfo::VT___METADATA, __metadata);
+  }
+  void add_header(::flatbuffers::Offset<fb::std_msgs::Header> header) {
+    fbb_.AddOffset(ObstacleInfo::VT_HEADER, header);
+  }
+  void add_down(float down) {
+    fbb_.AddElement<float>(ObstacleInfo::VT_DOWN, down, 0.0f);
+  }
+  void add_front(float front) {
+    fbb_.AddElement<float>(ObstacleInfo::VT_FRONT, front, 0.0f);
+  }
+  void add_right(float right) {
+    fbb_.AddElement<float>(ObstacleInfo::VT_RIGHT, right, 0.0f);
+  }
+  void add_back(float back) {
+    fbb_.AddElement<float>(ObstacleInfo::VT_BACK, back, 0.0f);
+  }
+  void add_left(float left) {
+    fbb_.AddElement<float>(ObstacleInfo::VT_LEFT, left, 0.0f);
+  }
+  void add_up(float up) {
+    fbb_.AddElement<float>(ObstacleInfo::VT_UP, up, 0.0f);
+  }
+  void add_HEALT_NOT_WORKING(uint8_t HEALT_NOT_WORKING) {
+    fbb_.AddElement<uint8_t>(ObstacleInfo::VT_HEALT_NOT_WORKING, HEALT_NOT_WORKING, 0);
+  }
+  void add_HEALT_WORKING(uint8_t HEALT_WORKING) {
+    fbb_.AddElement<uint8_t>(ObstacleInfo::VT_HEALT_WORKING, HEALT_WORKING, 1);
+  }
+  void add_down_health(uint8_t down_health) {
+    fbb_.AddElement<uint8_t>(ObstacleInfo::VT_DOWN_HEALTH, down_health, 0);
+  }
+  void add_front_health(uint8_t front_health) {
+    fbb_.AddElement<uint8_t>(ObstacleInfo::VT_FRONT_HEALTH, front_health, 0);
+  }
+  void add_right_health(uint8_t right_health) {
+    fbb_.AddElement<uint8_t>(ObstacleInfo::VT_RIGHT_HEALTH, right_health, 0);
+  }
+  void add_back_health(uint8_t back_health) {
+    fbb_.AddElement<uint8_t>(ObstacleInfo::VT_BACK_HEALTH, back_health, 0);
+  }
+  void add_left_health(uint8_t left_health) {
+    fbb_.AddElement<uint8_t>(ObstacleInfo::VT_LEFT_HEALTH, left_health, 0);
+  }
+  void add_up_health(uint8_t up_health) {
+    fbb_.AddElement<uint8_t>(ObstacleInfo::VT_UP_HEALTH, up_health, 0);
+  }
+  explicit ObstacleInfoBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<ObstacleInfo> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<ObstacleInfo>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<ObstacleInfo> CreateObstacleInfo(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    ::flatbuffers::Offset<fb::std_msgs::Header> header = 0,
+    float down = 0.0f,
+    float front = 0.0f,
+    float right = 0.0f,
+    float back = 0.0f,
+    float left = 0.0f,
+    float up = 0.0f,
+    uint8_t HEALT_NOT_WORKING = 0,
+    uint8_t HEALT_WORKING = 1,
+    uint8_t down_health = 0,
+    uint8_t front_health = 0,
+    uint8_t right_health = 0,
+    uint8_t back_health = 0,
+    uint8_t left_health = 0,
+    uint8_t up_health = 0) {
+  ObstacleInfoBuilder builder_(_fbb);
+  builder_.add_up(up);
+  builder_.add_left(left);
+  builder_.add_back(back);
+  builder_.add_right(right);
+  builder_.add_front(front);
+  builder_.add_down(down);
+  builder_.add_header(header);
+  builder_.add___metadata(__metadata);
+  builder_.add_up_health(up_health);
+  builder_.add_left_health(left_health);
+  builder_.add_back_health(back_health);
+  builder_.add_right_health(right_health);
+  builder_.add_front_health(front_health);
+  builder_.add_down_health(down_health);
+  builder_.add_HEALT_WORKING(HEALT_WORKING);
+  builder_.add_HEALT_NOT_WORKING(HEALT_NOT_WORKING);
+  return builder_.Finish();
+}
+
+struct WaypointV2MissionStatePush FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef WaypointV2MissionStatePushBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT___METADATA = 4,
+    VT_COMMONDATAVERSION = 6,
+    VT_COMMONDATALEN = 8,
+    VT_CURWAYPOINTINDEX = 10,
+    VT_STATE = 12,
+    VT_VELOCITY = 14
+  };
+  const fb::MsgMetadata *__metadata() const {
+    return GetPointer<const fb::MsgMetadata *>(VT___METADATA);
+  }
+  uint8_t commonDataVersion() const {
+    return GetField<uint8_t>(VT_COMMONDATAVERSION, 0);
+  }
+  uint16_t commonDataLen() const {
+    return GetField<uint16_t>(VT_COMMONDATALEN, 0);
+  }
+  uint16_t curWaypointIndex() const {
+    return GetField<uint16_t>(VT_CURWAYPOINTINDEX, 0);
+  }
+  uint8_t state() const {
+    return GetField<uint8_t>(VT_STATE, 0);
+  }
+  uint16_t velocity() const {
+    return GetField<uint16_t>(VT_VELOCITY, 0);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT___METADATA) &&
+           verifier.VerifyTable(__metadata()) &&
+           VerifyField<uint8_t>(verifier, VT_COMMONDATAVERSION, 1) &&
+           VerifyField<uint16_t>(verifier, VT_COMMONDATALEN, 2) &&
+           VerifyField<uint16_t>(verifier, VT_CURWAYPOINTINDEX, 2) &&
+           VerifyField<uint8_t>(verifier, VT_STATE, 1) &&
+           VerifyField<uint16_t>(verifier, VT_VELOCITY, 2) &&
+           verifier.EndTable();
+  }
+};
+
+struct WaypointV2MissionStatePushBuilder {
+  typedef WaypointV2MissionStatePush Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add___metadata(::flatbuffers::Offset<fb::MsgMetadata> __metadata) {
+    fbb_.AddOffset(WaypointV2MissionStatePush::VT___METADATA, __metadata);
+  }
+  void add_commonDataVersion(uint8_t commonDataVersion) {
+    fbb_.AddElement<uint8_t>(WaypointV2MissionStatePush::VT_COMMONDATAVERSION, commonDataVersion, 0);
+  }
+  void add_commonDataLen(uint16_t commonDataLen) {
+    fbb_.AddElement<uint16_t>(WaypointV2MissionStatePush::VT_COMMONDATALEN, commonDataLen, 0);
+  }
+  void add_curWaypointIndex(uint16_t curWaypointIndex) {
+    fbb_.AddElement<uint16_t>(WaypointV2MissionStatePush::VT_CURWAYPOINTINDEX, curWaypointIndex, 0);
+  }
+  void add_state(uint8_t state) {
+    fbb_.AddElement<uint8_t>(WaypointV2MissionStatePush::VT_STATE, state, 0);
+  }
+  void add_velocity(uint16_t velocity) {
+    fbb_.AddElement<uint16_t>(WaypointV2MissionStatePush::VT_VELOCITY, velocity, 0);
+  }
+  explicit WaypointV2MissionStatePushBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<WaypointV2MissionStatePush> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<WaypointV2MissionStatePush>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<WaypointV2MissionStatePush> CreateWaypointV2MissionStatePush(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    uint8_t commonDataVersion = 0,
+    uint16_t commonDataLen = 0,
+    uint16_t curWaypointIndex = 0,
+    uint8_t state = 0,
+    uint16_t velocity = 0) {
+  WaypointV2MissionStatePushBuilder builder_(_fbb);
+  builder_.add___metadata(__metadata);
+  builder_.add_velocity(velocity);
+  builder_.add_curWaypointIndex(curWaypointIndex);
+  builder_.add_commonDataLen(commonDataLen);
+  builder_.add_state(state);
+  builder_.add_commonDataVersion(commonDataVersion);
+  return builder_.Finish();
+}
+
+}  // namespace dji_osdk_ros
+
 namespace std_msgs {
 
 }  // namespace std_msgs
@@ -3822,10 +5003,6 @@ namespace sensor_msgs {
 
 }  // namespace sensor_msgs
 
-namespace mission_msgs {
-
-}  // namespace mission_msgs
-
 namespace amrl_msgs {
 
 }  // namespace amrl_msgs
@@ -3833,6 +5010,18 @@ namespace amrl_msgs {
 namespace nav_msgs {
 
 }  // namespace nav_msgs
+
+namespace std_srvs {
+
+}  // namespace std_srvs
+
+namespace aerialcore_common {
+
+}  // namespace aerialcore_common
+
+namespace dji_osdk_ros {
+
+}  // namespace dji_osdk_ros
 }  // namespace fb
 
 #endif  // FLATBUFFERS_GENERATED_SCHEMAMAIN_H_
