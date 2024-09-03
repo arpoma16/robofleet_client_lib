@@ -73,6 +73,9 @@ struct Vector3StampedBuilder;
 struct Twist;
 struct TwistBuilder;
 
+struct TwistStamped;
+struct TwistStampedBuilder;
+
 struct TwistWithCovariance;
 struct TwistWithCovarianceBuilder;
 
@@ -198,6 +201,9 @@ struct ConfigMissionRequestBuilder;
 struct ConfigMissionResponse;
 struct ConfigMissionResponseBuilder;
 
+struct eventService;
+struct eventServiceBuilder;
+
 struct eventRequest;
 struct eventRequestBuilder;
 
@@ -215,6 +221,13 @@ struct WaypointV2MissionStatePush;
 struct WaypointV2MissionStatePushBuilder;
 
 }  // namespace dji_osdk_ros
+
+namespace mavros_msgs {
+
+struct Altitude;
+struct AltitudeBuilder;
+
+}  // namespace mavros_msgs
 
 FLATBUFFERS_MANUALLY_ALIGNED_STRUCT(4) RosTime FLATBUFFERS_FINAL_CLASS {
  private:
@@ -1317,6 +1330,72 @@ inline ::flatbuffers::Offset<Twist> CreateTwist(
   TwistBuilder builder_(_fbb);
   builder_.add_angular(angular);
   builder_.add_linear(linear);
+  builder_.add___metadata(__metadata);
+  return builder_.Finish();
+}
+
+struct TwistStamped FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef TwistStampedBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT___METADATA = 4,
+    VT_HEADER = 6,
+    VT_TWIST = 8
+  };
+  const fb::MsgMetadata *__metadata() const {
+    return GetPointer<const fb::MsgMetadata *>(VT___METADATA);
+  }
+  const fb::std_msgs::Header *header() const {
+    return GetPointer<const fb::std_msgs::Header *>(VT_HEADER);
+  }
+  const fb::geometry_msgs::Twist *twist() const {
+    return GetPointer<const fb::geometry_msgs::Twist *>(VT_TWIST);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT___METADATA) &&
+           verifier.VerifyTable(__metadata()) &&
+           VerifyOffsetRequired(verifier, VT_HEADER) &&
+           verifier.VerifyTable(header()) &&
+           VerifyOffsetRequired(verifier, VT_TWIST) &&
+           verifier.VerifyTable(twist()) &&
+           verifier.EndTable();
+  }
+};
+
+struct TwistStampedBuilder {
+  typedef TwistStamped Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add___metadata(::flatbuffers::Offset<fb::MsgMetadata> __metadata) {
+    fbb_.AddOffset(TwistStamped::VT___METADATA, __metadata);
+  }
+  void add_header(::flatbuffers::Offset<fb::std_msgs::Header> header) {
+    fbb_.AddOffset(TwistStamped::VT_HEADER, header);
+  }
+  void add_twist(::flatbuffers::Offset<fb::geometry_msgs::Twist> twist) {
+    fbb_.AddOffset(TwistStamped::VT_TWIST, twist);
+  }
+  explicit TwistStampedBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<TwistStamped> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<TwistStamped>(end);
+    fbb_.Required(o, TwistStamped::VT_HEADER);
+    fbb_.Required(o, TwistStamped::VT_TWIST);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<TwistStamped> CreateTwistStamped(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    ::flatbuffers::Offset<fb::std_msgs::Header> header = 0,
+    ::flatbuffers::Offset<fb::geometry_msgs::Twist> twist = 0) {
+  TwistStampedBuilder builder_(_fbb);
+  builder_.add_twist(twist);
+  builder_.add_header(header);
   builder_.add___metadata(__metadata);
   return builder_.Finish();
 }
@@ -4546,6 +4625,70 @@ inline ::flatbuffers::Offset<ConfigMissionResponse> CreateConfigMissionResponse(
   return builder_.Finish();
 }
 
+struct eventService FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef eventServiceBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT___METADATA = 4,
+    VT_REQUEST = 6,
+    VT_RESPONSE = 8
+  };
+  const fb::MsgMetadata *__metadata() const {
+    return GetPointer<const fb::MsgMetadata *>(VT___METADATA);
+  }
+  const fb::aerialcore_common::eventRequest *request() const {
+    return GetPointer<const fb::aerialcore_common::eventRequest *>(VT_REQUEST);
+  }
+  const fb::aerialcore_common::eventResponse *response() const {
+    return GetPointer<const fb::aerialcore_common::eventResponse *>(VT_RESPONSE);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT___METADATA) &&
+           verifier.VerifyTable(__metadata()) &&
+           VerifyOffset(verifier, VT_REQUEST) &&
+           verifier.VerifyTable(request()) &&
+           VerifyOffset(verifier, VT_RESPONSE) &&
+           verifier.VerifyTable(response()) &&
+           verifier.EndTable();
+  }
+};
+
+struct eventServiceBuilder {
+  typedef eventService Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add___metadata(::flatbuffers::Offset<fb::MsgMetadata> __metadata) {
+    fbb_.AddOffset(eventService::VT___METADATA, __metadata);
+  }
+  void add_request(::flatbuffers::Offset<fb::aerialcore_common::eventRequest> request) {
+    fbb_.AddOffset(eventService::VT_REQUEST, request);
+  }
+  void add_response(::flatbuffers::Offset<fb::aerialcore_common::eventResponse> response) {
+    fbb_.AddOffset(eventService::VT_RESPONSE, response);
+  }
+  explicit eventServiceBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<eventService> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<eventService>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<eventService> CreateeventService(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    ::flatbuffers::Offset<fb::aerialcore_common::eventRequest> request = 0,
+    ::flatbuffers::Offset<fb::aerialcore_common::eventResponse> response = 0) {
+  eventServiceBuilder builder_(_fbb);
+  builder_.add_response(response);
+  builder_.add_request(request);
+  builder_.add___metadata(__metadata);
+  return builder_.Finish();
+}
+
 struct eventRequest FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
   typedef eventRequestBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
@@ -4991,6 +5134,112 @@ inline ::flatbuffers::Offset<WaypointV2MissionStatePush> CreateWaypointV2Mission
 
 }  // namespace dji_osdk_ros
 
+namespace mavros_msgs {
+
+struct Altitude FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef AltitudeBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT___METADATA = 4,
+    VT_MONOTONIC = 6,
+    VT_AMSL = 8,
+    VT_LOCAL = 10,
+    VT_RELATIVE = 12,
+    VT_TERRAIN = 14,
+    VT_BOTTOM_CLEARANCE = 16
+  };
+  const fb::MsgMetadata *__metadata() const {
+    return GetPointer<const fb::MsgMetadata *>(VT___METADATA);
+  }
+  float monotonic() const {
+    return GetField<float>(VT_MONOTONIC, 0.0f);
+  }
+  float amsl() const {
+    return GetField<float>(VT_AMSL, 0.0f);
+  }
+  float local() const {
+    return GetField<float>(VT_LOCAL, 0.0f);
+  }
+  float relative() const {
+    return GetField<float>(VT_RELATIVE, 0.0f);
+  }
+  float terrain() const {
+    return GetField<float>(VT_TERRAIN, 0.0f);
+  }
+  float bottom_clearance() const {
+    return GetField<float>(VT_BOTTOM_CLEARANCE, 0.0f);
+  }
+  bool Verify(::flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT___METADATA) &&
+           verifier.VerifyTable(__metadata()) &&
+           VerifyField<float>(verifier, VT_MONOTONIC, 4) &&
+           VerifyField<float>(verifier, VT_AMSL, 4) &&
+           VerifyField<float>(verifier, VT_LOCAL, 4) &&
+           VerifyField<float>(verifier, VT_RELATIVE, 4) &&
+           VerifyField<float>(verifier, VT_TERRAIN, 4) &&
+           VerifyField<float>(verifier, VT_BOTTOM_CLEARANCE, 4) &&
+           verifier.EndTable();
+  }
+};
+
+struct AltitudeBuilder {
+  typedef Altitude Table;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add___metadata(::flatbuffers::Offset<fb::MsgMetadata> __metadata) {
+    fbb_.AddOffset(Altitude::VT___METADATA, __metadata);
+  }
+  void add_monotonic(float monotonic) {
+    fbb_.AddElement<float>(Altitude::VT_MONOTONIC, monotonic, 0.0f);
+  }
+  void add_amsl(float amsl) {
+    fbb_.AddElement<float>(Altitude::VT_AMSL, amsl, 0.0f);
+  }
+  void add_local(float local) {
+    fbb_.AddElement<float>(Altitude::VT_LOCAL, local, 0.0f);
+  }
+  void add_relative(float relative) {
+    fbb_.AddElement<float>(Altitude::VT_RELATIVE, relative, 0.0f);
+  }
+  void add_terrain(float terrain) {
+    fbb_.AddElement<float>(Altitude::VT_TERRAIN, terrain, 0.0f);
+  }
+  void add_bottom_clearance(float bottom_clearance) {
+    fbb_.AddElement<float>(Altitude::VT_BOTTOM_CLEARANCE, bottom_clearance, 0.0f);
+  }
+  explicit AltitudeBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  ::flatbuffers::Offset<Altitude> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = ::flatbuffers::Offset<Altitude>(end);
+    return o;
+  }
+};
+
+inline ::flatbuffers::Offset<Altitude> CreateAltitude(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<fb::MsgMetadata> __metadata = 0,
+    float monotonic = 0.0f,
+    float amsl = 0.0f,
+    float local = 0.0f,
+    float relative = 0.0f,
+    float terrain = 0.0f,
+    float bottom_clearance = 0.0f) {
+  AltitudeBuilder builder_(_fbb);
+  builder_.add_bottom_clearance(bottom_clearance);
+  builder_.add_terrain(terrain);
+  builder_.add_relative(relative);
+  builder_.add_local(local);
+  builder_.add_amsl(amsl);
+  builder_.add_monotonic(monotonic);
+  builder_.add___metadata(__metadata);
+  return builder_.Finish();
+}
+
+}  // namespace mavros_msgs
+
 namespace std_msgs {
 
 }  // namespace std_msgs
@@ -5022,6 +5271,10 @@ namespace aerialcore_common {
 namespace dji_osdk_ros {
 
 }  // namespace dji_osdk_ros
+
+namespace mavros_msgs {
+
+}  // namespace mavros_msgs
 }  // namespace fb
 
 #endif  // FLATBUFFERS_GENERATED_SCHEMAMAIN_H_
